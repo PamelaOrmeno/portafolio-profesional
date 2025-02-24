@@ -56,16 +56,46 @@ scrollToTopButton.addEventListener('click', () => {
 document.addEventListener("DOMContentLoaded", function () {
     const slides = document.querySelectorAll(".slide");
     let currentIndex = 0;
+    let autoPlayInterval; // Variable para el intervalo de autoplay
 
-    document.getElementById("next").addEventListener("click", function () {
-        slides[currentIndex].classList.remove("active");
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        slides[index].classList.add("active");
+    }
+
+    function nextSlide() {
         currentIndex = (currentIndex + 1) % slides.length;
-        slides[currentIndex].classList.add("active");
+        showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    }
+
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+
+    // Eventos de los botones manuales
+    document.getElementById("next").addEventListener("click", function () {
+        nextSlide();
+        stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
+        startAutoPlay(); // Reinicia el autoplay
     });
 
     document.getElementById("prev").addEventListener("click", function () {
-        slides[currentIndex].classList.remove("active");
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        slides[currentIndex].classList.add("active");
+        prevSlide();
+        stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
+        startAutoPlay(); // Reinicia el autoplay
     });
+
+    // Iniciar autoplay cuando la página carga
+    showSlide(currentIndex);
+    startAutoPlay();
 });
+
