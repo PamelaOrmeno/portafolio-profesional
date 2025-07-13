@@ -55,6 +55,14 @@ scrollToTopButton.addEventListener('click', () => {
 
 document.addEventListener("DOMContentLoaded", function () {
     const slides = document.querySelectorAll(".slide");
+    const nextBtn = document.getElementById("next");
+    const prevBtn = document.getElementById("prev");
+
+    // Si no existen elementos para el slider, no ejecutar la lógica
+    if (slides.length === 0 || !nextBtn || !prevBtn) {
+        return;
+    }
+
     let currentIndex = 0;
     let autoPlayInterval; // Variable para el intervalo de autoplay
 
@@ -82,13 +90,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Eventos de los botones manuales
-    document.getElementById("next").addEventListener("click", function () {
+    nextBtn.addEventListener("click", function () {
         nextSlide();
         stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
         startAutoPlay(); // Reinicia el autoplay
     });
 
-    document.getElementById("prev").addEventListener("click", function () {
+    prevBtn.addEventListener("click", function () {
         prevSlide();
         stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
         startAutoPlay(); // Reinicia el autoplay
