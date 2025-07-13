@@ -82,20 +82,29 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Eventos de los botones manuales
-    document.getElementById("next").addEventListener("click", function () {
-        nextSlide();
-        stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
-        startAutoPlay(); // Reinicia el autoplay
-    });
 
-    document.getElementById("prev").addEventListener("click", function () {
-        prevSlide();
-        stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
-        startAutoPlay(); // Reinicia el autoplay
-    });
+    const nextButton = document.getElementById("next");
+    const prevButton = document.getElementById("prev");
 
-    // Iniciar autoplay cuando la página carga
-    showSlide(currentIndex);
-    startAutoPlay();
+    if (nextButton && prevButton) {
+        nextButton.addEventListener("click", function () {
+            nextSlide();
+            stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
+            startAutoPlay(); // Reinicia el autoplay
+        });
+
+        prevButton.addEventListener("click", function () {
+            prevSlide();
+            stopAutoPlay(); // Detiene el autoplay cuando el usuario interactúa
+            startAutoPlay(); // Reinicia el autoplay
+        });
+    }
+
+
+    if (slides.length > 0) {
+        // Iniciar autoplay cuando la página carga
+        showSlide(currentIndex);
+        startAutoPlay();
+    }
 });
 
