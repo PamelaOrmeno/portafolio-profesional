@@ -1,0 +1,450 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
+
+:root {
+  --nx-bg: #EEF2F7;
+  --nx-heading: #30455F;
+  --nx-text: #445B78;
+  /* Slightly stronger muted contrast on light backgrounds */
+  --nx-muted: rgba(68, 91, 120, 0.86);
+  --nx-hover: #3A4F6B;
+  --nx-surface: #FCFDFF;
+  --nx-border: rgba(84, 104, 130, 0.16);
+  --nx-accordion-bg: #FCFDFF;
+  --nx-accordion-active-bg: #EAF0FA;
+  --nx-accordion-text: #3A506A;
+  --nx-accordion-active-text: #32465F;
+  --nx-accordion-border: rgba(84, 104, 130, 0.22);
+  --nx-radius: 16px;
+
+  --bs-body-bg: var(--nx-bg);
+  --bs-body-color: var(--nx-text);
+  --bs-body-font-family: "Inter", sans-serif;
+  --bs-link-color: var(--nx-text);
+  --bs-link-hover-color: var(--nx-hover);
+  --bs-primary: #1C1C1C;
+  --bs-secondary: var(--nx-muted);
+  --bs-border-color: var(--nx-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+body.onepage,
+.bg-light {
+  margin: 0;
+  font-family: "Inter", sans-serif !important;
+  background-color: var(--nx-bg) !important;
+  color: var(--nx-text) !important;
+  line-height: 1.6;
+}
+
+.logo-img {
+  height: 100px;
+  width: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: var(--nx-hover);
+}
+
+#site-nav,
+#site-nav.bg-white {
+  background-color: var(--nx-surface) !important;
+  border-bottom: 1px solid var(--nx-border) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+#site-nav .navbar-brand,
+#site-nav .nav-link,
+a.navbar-brand,
+a.nav-link {
+  color: var(--nx-heading) !important;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+#site-nav .nav-link:hover,
+#site-nav .nav-link:focus-visible,
+#site-nav .nav-link.active {
+  color: var(--nx-hover) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-title,
+.text-primary,
+.text-gradient {
+  color: var(--nx-heading) !important;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+}
+
+p,
+li,
+.lead,
+.text-muted,
+.accordion-body {
+  color: var(--nx-muted) !important;
+  font-weight: 400 !important;
+}
+
+.section {
+  padding-top: clamp(3.5rem, 6vw, 5.25rem) !important;
+  padding-bottom: clamp(3.5rem, 6vw, 5.25rem) !important;
+}
+
+/* Keep section headers vertically consistent */
+.section-title {
+  margin-top: 0;
+  margin-bottom: clamp(1.25rem, 2.4vw, 1.9rem);
+  line-height: 1.2;
+}
+
+/* Improve reading rhythm in long-form section copy */
+.section p,
+.section .lead {
+  max-width: 70ch;
+  line-height: 1.72;
+  margin-bottom: 1rem;
+}
+
+.section .text-center p,
+.section .text-center .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section ul,
+.section ol {
+  margin-bottom: 0;
+}
+
+.section ul li,
+.section ol li {
+  line-height: 1.68;
+}
+
+.section ul li + li,
+.section ol li + li {
+  margin-top: 0.38rem;
+}
+
+.hero-section {
+  background: #E9EEF6 !important;
+}
+
+.nx-card,
+.card,
+.skill-block,
+.final-cta,
+.accordion-item {
+  background: var(--nx-surface) !important;
+  border: 1px solid var(--nx-accordion-border) !important;
+  border-radius: var(--nx-radius) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.04) !important;
+}
+
+.btn {
+  border-radius: 12px !important;
+  font-family: "Inter", sans-serif !important;
+  font-weight: 600 !important;
+  padding: 0.65rem 1.25rem !important;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn-dark {
+  background-color: #1A1A1A !important;
+  border-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+  letter-spacing: 0.3px;
+  box-shadow: none !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-dark:hover,
+.btn-dark:focus-visible {
+  background-color: #2A2A2A !important;
+  border-color: #2A2A2A !important;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+}
+
+.btn-dark:active {
+  transform: translateY(0);
+}
+
+.btn-dark:not(.btn-lg):not(.btn-sm),
+.btn-outline-dark:not(.btn-lg):not(.btn-sm) {
+  padding: 14px 24px !important;
+}
+
+.nx-btn-primary,
+.btn-primary,
+.contact-send-btn {
+  background-color: #1C1C1C !important;
+  border-color: #1C1C1C !important;
+  color: #FFFFFF !important;
+}
+
+.nx-btn-primary:hover,
+.nx-btn-primary:focus-visible,
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.contact-send-btn:hover,
+.contact-send-btn:focus-visible {
+  background-color: #111111 !important;
+  border-color: #111111 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-outline-dark {
+  background-color: transparent !important;
+  border: 1px solid #1A1A1A !important;
+  color: #1A1A1A !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:focus-visible {
+  background-color: #1A1A1A !important;
+  border-color: #1A1A1A !important;
+  color: #FFFFFF !important;
+}
+
+.accordion-button {
+  color: var(--nx-accordion-text) !important;
+  background: var(--nx-accordion-bg) !important;
+  font-weight: 600 !important;
+}
+
+.accordion-button:not(.collapsed) {
+  color: var(--nx-accordion-active-text) !important;
+  background: var(--nx-accordion-active-bg) !important;
+  border-bottom: 1px solid var(--nx-accordion-border) !important;
+}
+
+.accordion-button:hover {
+  background: #EFF3FB !important;
+}
+
+.accordion-button::after {
+  filter: saturate(0.6) hue-rotate(190deg);
+}
+
+/* Ensure IA accordion uses the same pastel palette as the global theme */
+#ia .accordion {
+  --bs-accordion-color: var(--nx-muted);
+  --bs-accordion-bg: var(--nx-surface);
+  --bs-accordion-border-color: var(--nx-accordion-border);
+  --bs-accordion-btn-color: var(--nx-accordion-text);
+  --bs-accordion-btn-bg: var(--nx-accordion-bg);
+  --bs-accordion-active-color: var(--nx-accordion-active-text);
+  --bs-accordion-active-bg: var(--nx-accordion-active-bg);
+  --bs-accordion-btn-focus-border-color: rgba(84, 104, 130, 0.34);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(84, 104, 130, 0.16);
+  --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%233A506A'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2332465F'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+#ia .accordion-item {
+  border-color: var(--nx-accordion-border) !important;
+  background: var(--nx-surface) !important;
+}
+
+#ia .accordion-button {
+  color: var(--nx-accordion-text) !important;
+  background: var(--nx-accordion-bg) !important;
+}
+
+#ia .accordion-button:not(.collapsed) {
+  color: var(--nx-accordion-active-text) !important;
+  background: var(--nx-accordion-active-bg) !important;
+}
+
+#ia .accordion-button:hover {
+  color: var(--nx-hover) !important;
+}
+
+#ia .accordion-body {
+  color: var(--nx-muted) !important;
+  background: var(--nx-surface) !important;
+}
+
+#ia .accordion-button::after {
+  filter: none;
+}
+
+.executive-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.kpi-chip {
+  background: #F2F5FB !important;
+  border: 1px solid var(--nx-border) !important;
+  color: var(--nx-text) !important;
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.contact-icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 1;
+  border-radius: 999px;
+  border: 1px solid var(--nx-border);
+  background: var(--nx-surface);
+  color: var(--nx-text) !important;
+  text-decoration: none !important;
+}
+
+.contact-icon-link svg {
+  display: block;
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.contact-icon-link:hover,
+.contact-icon-link:focus-visible {
+  background: #E8EEF8 !important;
+  color: #111111 !important;
+  text-decoration: none !important;
+}
+
+.contact-container {
+  max-width: 1080px;
+}
+
+.contact-standalone {
+  padding: clamp(2.75rem, 5.5vw, 4.5rem) 0;
+  background-color: var(--nx-bg) !important;
+}
+
+.contact-heading {
+  margin-bottom: 1.6rem;
+}
+
+.contact-heading h1,
+.contact-heading h2 {
+  margin-bottom: clamp(1.25rem, 2.4vw, 1.9rem);
+}
+
+.contact-heading p {
+  color: var(--nx-muted) !important;
+  margin-bottom: 0;
+}
+
+.contact-shell {
+  padding: clamp(1.25rem, 3.8vw, 2rem);
+}
+
+.contact-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--nx-text) !important;
+}
+
+.contact-icon-list {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+#copy-email {
+  min-width: 8.75rem;
+  background-color: var(--nx-surface) !important;
+  border: 1px solid var(--nx-border) !important;
+  color: var(--nx-text) !important;
+}
+
+#copy-email:hover,
+#copy-email:focus-visible {
+  background-color: #E8EEF8 !important;
+  border-color: rgba(0, 0, 0, 0.14) !important;
+  color: var(--nx-text) !important;
+}
+
+#quickContactForm .form-control {
+  border-radius: 10px;
+  border: 1px solid var(--nx-border);
+  background: #fff;
+}
+
+#quickContactForm .form-control:focus {
+  border-color: rgba(28, 28, 28, 0.28);
+  box-shadow: 0 0 0 0.2rem rgba(28, 28, 28, 0.10);
+}
+
+#quickContactForm .form-label {
+  color: var(--nx-text);
+  font-weight: 600;
+}
+
+#quick-form-feedback,
+#copy-feedback {
+  min-height: 1.25rem;
+  color: var(--nx-muted) !important;
+}
+
+footer,
+footer.bg-white,
+footer .small {
+  background-color: var(--nx-bg) !important;
+  color: var(--nx-muted) !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.nav-link:focus-visible,
+.accordion-button:focus-visible {
+  outline: 3px solid rgba(28, 28, 28, 0.28);
+  outline-offset: 2px;
+}
+
+main,
+.container,
+.row {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  body.onepage {
+    padding-top: 72px;
+  }
+
+  .display-5,
+  h1 {
+    font-size: clamp(1.9rem, 7vw, 2.4rem) !important;
+    line-height: 1.2;
+  }
+
+  .section-title,
+  h2 {
+    font-size: clamp(1.5rem, 5.2vw, 1.9rem) !important;
+  }
+
+  .contact-shell {
+    padding: 1rem;
+  }
+}
