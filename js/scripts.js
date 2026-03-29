@@ -1,130 +1,117 @@
-// Navegacion one-page y utilidades compartidas.
+// Navegación one-page y botón volver arriba
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // ── Navegación suave ──────────────────────────────────────
     const nav = document.getElementById("site-nav");
-    const navLinks = Array.from(document.querySelectorAll("#mainNav .nav-link"));
+    const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (nav && navLinks.length) {
-        const sections = Array.from(document.querySelectorAll("main section[id]"));
-        const navbarCollapseEl = document.getElementById("mainNav");
-        const bsCollapse = navbarCollapseEl ? bootstrap.Collapse.getOrCreateInstance(navbarCollapseEl, { toggle: false }) : null;
-        const toggler = document.querySelector(".navbar-toggler");
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const navHeight = () => nav ? nav.offsetHeight : 0;
 
-        const navHeight = () => (nav ? nav.offsetHeight : 0);
-
-        const setActiveLink = (id) => {
-            navLinks.forEach((link) => {
-                const href = link.getAttribute("href") || "";
-                const isHashLink = href.startsWith("#");
-                const isActive = isHashLink && href === `#${id}`;
-
-                link.classList.toggle("active", isActive);
-                if (isActive) {
-                    link.setAttribute("aria-current", "page");
-                } else if (isHashLink) {
-                    link.removeAttribute("aria-current");
-                }
-            });
-        };
-
-        const smoothScrollTo = (targetId) => {
-            const target = document.getElementById(targetId);
-            if (!target) return;
-
-            const y = target.getBoundingClientRect().top + window.scrollY - navHeight() + 1;
-            window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
-        };
-
+    const setActiveLink = (id) => {
         navLinks.forEach((link) => {
-            link.addEventListener("click", (event) => {
-                const href = link.getAttribute("href") || "";
-                if (!href.startsWith("#")) return;
-
-                event.preventDefault();
-                const targetId = href.slice(1);
-                smoothScrollTo(targetId);
-                setActiveLink(targetId);
-                history.replaceState(null, "", href);
-
-                if (toggler && window.getComputedStyle(toggler).display !== "none" && bsCollapse) {
-                    bsCollapse.hide();
-                }
-            });
+            const href = link.getAttribute("href") || "";
+            const isActive = href === `#${id}`;
+            link.classList.toggle("active", isActive);
+            if (isActive) link.setAttribute("aria-current", "page");
+            else link.removeAttribute("aria-current");
         });
+    };
 
-        if (sections.length && "IntersectionObserver" in window) {
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            setActiveLink(entry.target.id);
-                        }
-                    });
-                },
-                {
-                    root: null,
-                    threshold: 0.45,
-                    rootMargin: `-${navHeight()}px 0px -35% 0px`
-                }
-            );
+    const smoothScrollTo = (targetId) => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        const y = target.getBoundingClientRect().top + window.scrollY - navHeight() + 1;
+        window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    };
 
-            sections.forEach((section) => observer.observe(section));
-        }
+    navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+            const href = link.getAttribute("href") || "";
+            if (!href.startsWith("#")) return;
+            e.preventDefault();
+            const targetId = href.slice(1);
+            smoothScrollTo(targetId);
+            setActiveLink(targetId);
+            history.replaceState(null, "", href);
+            // cerrar menú móvil si está abierto
+            document.getElementById("mainNav")?.classList.remove("open");
+            document.getElementById("navToggler")?.setAttribute("aria-expanded", "false");
+        });
+    });
 
-        if (window.location.hash) {
-            const initialId = window.location.hash.slice(1);
-            if (document.getElementById(initialId)) {
-                setTimeout(() => smoothScrollTo(initialId), 120);
-                setActiveLink(initialId);
-            }
-        } else if (document.getElementById("inicio")) {
-            setActiveLink("inicio");
-        }
+    // IntersectionObserver para activar link según sección visible
+    if (sections.length && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActiveLink(entry.target.id);
+                });
+            },
+            { root: null, threshold: 0.35, rootMargin: `-${navHeight()}px 0px -35% 0px` }
+        );
+        sections.forEach((s) => observer.observe(s));
     }
 
-    const contactRoot = document.querySelector(".contact-standalone");
-    const linkedinLink = document.getElementById("contact-linkedin");
-    const githubLink = document.getElementById("contact-github");
-
-    if (contactRoot) {
-        const linkedin = (contactRoot.dataset.linkedin || "https://linkedin.com/in/tuusuario").trim();
-        const github = (contactRoot.dataset.github || "https://github.com/tuusuario").trim();
-
-        if (linkedinLink) {
-            linkedinLink.href = linkedin;
+    // Hash inicial en URL
+    if (window.location.hash) {
+        const id = window.location.hash.slice(1);
+        if (document.getElementById(id)) {
+            setTimeout(() => smoothScrollTo(id), 120);
+            setActiveLink(id);
         }
-
-        if (githubLink) {
-            githubLink.href = github;
-        }
+    } else {
+        setActiveLink("inicio");
     }
 
-    // === Botón volver arriba ===
-    (function () {
-        const btn = document.getElementById("back-to-top");
-        if (!btn) return;
+    // ── Menú hamburguesa móvil ────────────────────────────────
+    const toggler = document.getElementById("navToggler");
+    const mobileMenu = document.getElementById("mainNav");
 
-        const SCROLL_THRESHOLD = 400;
+    if (toggler && mobileMenu) {
+        toggler.addEventListener("click", () => {
+            const isOpen = mobileMenu.classList.toggle("open");
+            toggler.setAttribute("aria-expanded", String(isOpen));
+        });
+    }
 
-        const toggleVisibility = () => {
-            if (window.scrollY > SCROLL_THRESHOLD) {
-                btn.classList.add("visible");
-            } else {
-                btn.classList.remove("visible");
-            }
-        };
-
-        window.addEventListener("scroll", toggleVisibility, { passive: true });
-
+    // ── Acordeón ─────────────────────────────────────────────
+    document.querySelectorAll(".acc-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
-            const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-            window.scrollTo({
-                top: 0,
-                behavior: prefersReducedMotion ? "auto" : "smooth"
-            });
-        });
+            const targetId = btn.getAttribute("data-target");
+            const body = document.getElementById(targetId);
+            const isOpen = btn.classList.contains("open");
 
-        toggleVisibility();
-    })();
+            // cerrar todos
+            document.querySelectorAll(".acc-btn").forEach((b) => {
+                b.classList.remove("open");
+                b.setAttribute("aria-expanded", "false");
+                const id = b.getAttribute("data-target");
+                document.getElementById(id)?.classList.add("hidden");
+            });
+
+            // abrir el clickeado si estaba cerrado
+            if (!isOpen && body) {
+                btn.classList.add("open");
+                btn.setAttribute("aria-expanded", "true");
+                body.classList.remove("hidden");
+            }
+        });
+    });
+
+    // ── Botón volver arriba ───────────────────────────────────
+    const backBtn = document.getElementById("back-to-top");
+    if (backBtn) {
+        const toggle = () => {
+            backBtn.classList.toggle("visible", window.scrollY > 400);
+        };
+        window.addEventListener("scroll", toggle, { passive: true });
+        toggle();
+
+        backBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+        });
+    }
 });
