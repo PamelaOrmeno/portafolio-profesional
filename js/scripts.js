@@ -20,12 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-    const smoothScrollTo = (targetId) => {
-        const target = document.getElementById(targetId);
-        if (!target) return;
-        const y = target.getBoundingClientRect().top + window.scrollY - navHeight() + 1;
-        window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
-    };
+const smoothScrollTo = (targetId) => {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const offset = targetId === "inicio" ? 0 : navHeight() - 1;
+    const y = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
+};
 
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
