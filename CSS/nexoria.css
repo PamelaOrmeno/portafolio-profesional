@@ -63,10 +63,6 @@ body {
   scroll-margin-top: var(--nav-h);
 }
 
-.hero-section {
-  scroll-margin-top: 0;
-}
-
 .section-alt { background: var(--bg-alt); }
 
 /* ================================
@@ -164,7 +160,7 @@ li + li { margin-top: 0.35rem; }
 .hero-section {
   background: var(--hero-bg);
   padding: clamp(3.5rem, 7vw, 5.5rem) 0;
-  scroll-margin-top: 0;
+  scroll-margin-top: var(--nav-h);
 }
 
 .hero-content { max-width: 680px; }
