@@ -63,6 +63,10 @@ body {
   scroll-margin-top: var(--nav-h);
 }
 
+.hero-section {
+  scroll-margin-top: 0;
+}
+
 .section-alt { background: var(--bg-alt); }
 
 /* ================================
