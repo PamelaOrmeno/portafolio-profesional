@@ -160,6 +160,7 @@ li + li { margin-top: 0.35rem; }
    HERO
 ================================ */
 .hero-section {
+   margin-top: var(--nav-h);
   background: var(--hero-bg);
   padding: clamp(3.5rem, 7vw, 5.5rem) 0;
   scroll-margin-top: 0;
