@@ -28,9 +28,11 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.65;
-  padding-top: var(--nav-h);
+  padding-top: 0;
 }
-
+hero-section {
+  margin-top: var(--nav-h);
+}
 /* ================================
    ACCESIBILIDAD
 ================================ */
