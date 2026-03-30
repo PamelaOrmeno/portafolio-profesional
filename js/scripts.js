@@ -66,9 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => smoothScrollTo(id), 120);
             setActiveLink(id);
         }
-    } else {
-        setActiveLink("inicio");
-    }
+    
 
     // ── Menú hamburguesa móvil ────────────────────────────────
     const toggler = document.getElementById("navToggler");
