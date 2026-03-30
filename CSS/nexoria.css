@@ -160,7 +160,7 @@ li + li { margin-top: 0.35rem; }
 .hero-section {
   background: var(--hero-bg);
   padding: clamp(3.5rem, 7vw, 5.5rem) 0;
-  scroll-margin-top: var(--nav-h);
+  scroll-margin-top: 0;
 }
 
 .hero-content { max-width: 680px; }
@@ -383,9 +383,7 @@ footer p {
 }
 
 #back-to-top.visible { opacity: 1; visibility: visible; }
-
 #back-to-top:hover { background: var(--accent-hover); }
-
 #back-to-top:focus-visible {
   outline: 3px solid rgba(123, 111, 196, 0.5);
   outline-offset: 2px;
@@ -426,7 +424,6 @@ button:focus-visible {
   }
 
   .nav-links.open { display: flex; }
-
   .nav-links li { width: 100%; }
 
   .nav-link {
@@ -436,6 +433,5 @@ button:focus-visible {
   }
 
   .nav-toggler { display: flex; }
-
   .hero-content h1 { font-size: clamp(1.5rem, 7vw, 2rem); }
 }
