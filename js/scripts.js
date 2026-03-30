@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ── Navegación suave ──────────────────────────────────────
     const nav = document.getElementById("site-nav");
     const navLinks = Array.from(document.querySelectorAll(".nav-link"));
     const sections = Array.from(document.querySelectorAll("main section[id]"));
@@ -46,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // IntersectionObserver para activar link según sección visible
     if (sections.length && "IntersectionObserver" in window) {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -59,16 +57,14 @@ document.addEventListener("DOMContentLoaded", () => {
         sections.forEach((s) => observer.observe(s));
     }
 
-    // Hash inicial en URL
     if (window.location.hash) {
         const id = window.location.hash.slice(1);
         if (document.getElementById(id)) {
             setTimeout(() => smoothScrollTo(id), 120);
             setActiveLink(id);
         }
-    
+    }
 
-    // ── Menú hamburguesa móvil ────────────────────────────────
     const toggler = document.getElementById("navToggler");
     const mobileMenu = document.getElementById("mainNav");
 
@@ -79,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ── Acordeón ─────────────────────────────────────────────
     document.querySelectorAll(".acc-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
             const targetId = btn.getAttribute("data-target");
@@ -101,7 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // ── Botón volver arriba ───────────────────────────────────
     const backBtn = document.getElementById("back-to-top");
     if (backBtn) {
         const toggle = () => {
