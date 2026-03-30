@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const smoothScrollTo = (targetId) => {
     const target = document.getElementById(targetId);
     if (!target) return;
-const offset = targetId === "inicio" ? navHeight() : navHeight() - 1;
+const offset = navHeight() - 1;
     const y = target.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
 };
