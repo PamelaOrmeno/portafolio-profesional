@@ -112,8 +112,8 @@ hero-section {
   transition: color 0.15s;
 }
 
-.nav-link:hover,
-.nav-link.active { color: var(--text); }
+.nav-link:hover { color: var(--text); }
+
 
 .nav-toggler {
   display: none;
