@@ -20,13 +20,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     };
 
-const smoothScrollTo = (targetId) => {
-    const target = document.getElementById(targetId);
-    if (!target) return;
-const offset = navHeight() - 1;
-    const y = target.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
-};
+    const smoothScrollTo = (targetId) => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        if (targetId === "inicio") {
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+            return;
+        }
+        const offset = navHeight() - 1;
+        const y = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: y, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    };
 
     navLinks.forEach((link) => {
         link.addEventListener("click", (e) => {
@@ -37,7 +41,6 @@ const offset = navHeight() - 1;
             smoothScrollTo(targetId);
             setActiveLink(targetId);
             history.replaceState(null, "", href);
-            // cerrar menú móvil si está abierto
             document.getElementById("mainNav")?.classList.remove("open");
             document.getElementById("navToggler")?.setAttribute("aria-expanded", "false");
         });
@@ -85,7 +88,6 @@ const offset = navHeight() - 1;
             const body = document.getElementById(targetId);
             const isOpen = btn.classList.contains("open");
 
-            // cerrar todos
             document.querySelectorAll(".acc-btn").forEach((b) => {
                 b.classList.remove("open");
                 b.setAttribute("aria-expanded", "false");
@@ -93,7 +95,6 @@ const offset = navHeight() - 1;
                 document.getElementById(id)?.classList.add("hidden");
             });
 
-            // abrir el clickeado si estaba cerrado
             if (!isOpen && body) {
                 btn.classList.add("open");
                 btn.setAttribute("aria-expanded", "true");
